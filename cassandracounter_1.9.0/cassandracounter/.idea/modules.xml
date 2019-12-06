@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cassandracounter.iml" filepath="$PROJECT_DIR$/cassandracounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-cassandracounter-nar/nifi-cassandracounter-nar.iml" filepath="$PROJECT_DIR$/nifi-cassandracounter-nar/nifi-cassandracounter-nar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-cassandracounter-processors/nifi-cassandracounter-processors.iml" filepath="$PROJECT_DIR$/nifi-cassandracounter-processors/nifi-cassandracounter-processors.iml" />
+    </modules>
+  </component>
+</project>
