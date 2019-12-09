@@ -1,4 +1,4 @@
-# nifi
+# Apache Nifi
 Extending Nifi's Functionalities by adding new components 
 
 Custom Processors 
