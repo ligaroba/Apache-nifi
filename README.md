@@ -7,13 +7,23 @@ Custom Processors
     reduce Perfomance overheads that Comes with dealing with Large amounts of data.
     
     ## Problem Faced     
-    Was trying to Load large amounts of data into a counter table, iwas forced to use split text 
+    Was trying to Load large amounts of data into a counter table, i was forced to use split text 
     processor to for me to Evaluate JSON path the json object as atrribute then use Replace text to generate a custom 
-    UPSERT statement e.g UPDATE keyspace.tablename SET counter_col1=counter_col1 + number ... WHERE primary_keyCol1= 
+    UPSERT statement e.g 
+    
+    fromSource-->QueryRecord-->SplitText {Splits to single flowfile}-->EvaluateJSONPath-->ReplaceText-->PutCassandraSQL 
+    OutPut
+    UPDATE keyspace.tablename SET counter_col1=counter_col1 + number ... WHERE primary_keyCol1= 
     value ...
+    
+    Reason for splitting to single flow files was because ReplaceText pick attributes values using Expression language,
+    Attributes stores only one record at a time so if you have n records in a file only one of the record will be available 
+    from the Attribute of that flowfile
     
     ## Solution
   
     I created a Custom Convert JSON to Cassandra Counter UPSERT SQL That does batch update statement that takes in a 
     batch flowfile content and generates UPSERT statements for all the flowfile records 
+    
+    fromSource-->QueryRecord-->ConvertJSONToCassandraCounterSQL-->PutCassandraSQL 
     
