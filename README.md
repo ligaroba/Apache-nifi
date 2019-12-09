@@ -2,7 +2,7 @@
 Extending Nifi's Functionalities by adding new components 
 
 Custom Processors 
-1.  ## Convert JSON To Cassandra Counter column UPSERT Statement 
+1.  Convert JSON To Cassandra Counter column UPSERT Statement 
   
     This processor add functionality of working with cassandra Counter tables.The problem solved in this context is to 
     reduce Perfomance overheads that Comes with dealing with Large amounts of data.
