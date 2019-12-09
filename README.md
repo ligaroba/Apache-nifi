@@ -12,7 +12,8 @@ Custom Processors
     UPSERT statement e.g 
     
     fromSource-->QueryRecord-->SplitText {Splits to single flowfile}-->EvaluateJSONPath-->ReplaceText-->PutCassandraSQL 
-    OutPut
+        
+    OUTPUT
     UPDATE keyspace.tablename SET counter_col1=counter_col1 + number ... WHERE primary_keyCol1= 
     value ...
     
@@ -26,4 +27,8 @@ Custom Processors
     batch flowfile content and generates UPSERT statements for all the flowfile records 
     
     fromSource-->QueryRecord-->ConvertJSONToCassandraCounterSQL-->PutCassandraSQL 
+    
+    OUTPUT
+    UPDATE keyspace.tablename SET counter_col1=counter_col1 + number ... WHERE primary_keyCol1= 
+        value ...
     
