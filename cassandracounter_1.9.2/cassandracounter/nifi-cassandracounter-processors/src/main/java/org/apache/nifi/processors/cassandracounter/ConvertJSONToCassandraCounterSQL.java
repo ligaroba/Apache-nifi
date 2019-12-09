@@ -75,7 +75,7 @@ import static org.apache.nifi.flowfile.attributes.FragmentAttributes.*;
                 + "<sql>.args.N.type attribute that indicates how the value should be interpreted when inserting it into the database."
                 + "The prefix for this attribute ('sql', e.g.) is determined by the SQL Parameter Attribute Prefix property.")
 })
-public class ConvertJSONToCassandraCounterSQL extends AbstractProcessor implements Processor {
+public class ConvertJSONToCassandraCounterSQL extends AbstractProcessor  {
 
     private static final String UPDATE_TYPE = "UPDATE";
     private static final String ADDITION="+";
@@ -340,20 +340,17 @@ public class ConvertJSONToCassandraCounterSQL extends AbstractProcessor implemen
         while (cKeys.hasNext()) {
             final String fieldName = cKeys.next();
             if (counterjsonFdNames.contains(fieldName)) {
+                sqlBuilder.append(fieldName);
                 if (fieldCount++ > 0) {
                     sqlBuilder.append(" ,");
                 }
-                sqlBuilder.append(fieldName);
+                sqlBuilder.append(" = " + fieldName + " " + operator + " ? ");
                 attributes.put(attributePrefix + ".args." + fieldCount + ".value", counterColsDataType);
                 final JsonNode fieldNode = jsonNode.get(fieldName);
-
                 if (!fieldNode.isNull()) {
                     String fieldValue = fieldNode.asText();
                     attributes.put(attributePrefix + ".args." + fieldCount + ".value", fieldValue);
-                    sqlBuilder.append(" = " + fieldName + " " + operator + ""+fieldValue+"");
                 }
-
-
             }
 
         }
@@ -364,19 +361,19 @@ public class ConvertJSONToCassandraCounterSQL extends AbstractProcessor implemen
         //fieldNames = jsonNode.fieldNames();
         while (upKeys.hasNext()) {
             final String uFieldName = upKeys.next();
+            if (whereFieldCount++ > 0) {
+                sqlBuilder.append(" AND ");
+            }
+
             fieldCount++;
             if (updatejsonFdNames.contains(uFieldName)) {
-                if (whereFieldCount++ > 0) {
-                    sqlBuilder.append(" AND ");
-                }
                 sqlBuilder.append(uFieldName);
-
+                sqlBuilder.append(" = ? ");
                 attributes.put(attributePrefix + ".args." + fieldCount + ".value", updateKeysDataType);
                 final JsonNode fieldNode = jsonNode.get(uFieldName);
                 if (!fieldNode.isNull()) {
                     String fieldValue = fieldNode.asText();
                     attributes.put(attributePrefix + ".args." + fieldCount + ".value", fieldValue);
-                    sqlBuilder.append(" ='"+ fieldValue +"'");
                 }
             }
         }

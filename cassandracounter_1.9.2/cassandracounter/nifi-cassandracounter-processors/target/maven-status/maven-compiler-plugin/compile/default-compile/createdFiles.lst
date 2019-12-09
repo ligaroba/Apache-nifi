@@ -1,0 +1,3 @@
+org\apache\nifi\processors\cassandracounter\ConvertJSONToCassandraCounterSQL$1.class
+org\apache\nifi\processors\cassandracounter\ConvertJSONToCassandraCounterSQL.class
+org\apache\nifi\processors\cassandracounter\ConvertJSONToCassandraCounterSQL$2.class
