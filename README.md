@@ -12,7 +12,8 @@ Custom Processors
     UPSERT statement e.g UPDATE keyspace.tablename SET counter_col1=counter_col1 + number ... WHERE primary_keyCol1= 
     value ...
     
-    ##Solution 
+    ## Solution
+  
     I created a Custom Convert JSON to Cassandra Counter UPSERT SQL That does batch update statement that takes in a 
     batch flowfile content and generates UPSERT statements for all the flowfile records 
     
